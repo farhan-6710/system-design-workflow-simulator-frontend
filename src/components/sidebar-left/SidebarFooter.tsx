@@ -11,7 +11,7 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import { ChevronUp, LogOut, Settings, User } from "lucide-react";
-import { useAuth } from "@/contexts/auth-context";
+import { useAuth } from "@/contexts/authContext";
 import { AuthDialog } from "../auth/AuthDialog";
 import { ConfirmationModal } from "../atoms/ConfirmationModal";
 import { getUserInitials, getUserDisplayName } from "@/utils/auth/userUtils";

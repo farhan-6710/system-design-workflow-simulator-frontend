@@ -6,7 +6,7 @@ import { ModeToggle } from "../extras/ModeToggele";
 import { Badge, Bell, Menu } from "lucide-react";
 import { UserAvatar } from "../auth/UserAvatar";
 import { AuthDialog } from "../auth/AuthDialog";
-import { useAuth } from "@/contexts/auth-context";
+import { useAuth } from "@/contexts/authContext";
 
 interface HeaderProps {
   onToggle: () => void;

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useAuth } from "@/contexts/auth-context";
+import { useAuth } from "@/contexts/authContext";
 import { Mail, Lock, User, Eye, EyeOff, CheckCircle } from "lucide-react";
 import { toast } from "sonner";
 
