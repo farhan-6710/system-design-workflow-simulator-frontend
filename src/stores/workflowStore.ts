@@ -15,11 +15,18 @@ import {
 } from "@/utils/workflow-studio/workflow-layer/workflowCoreUtils";
 import { createZoomActions } from "@/utils/workflow-studio/canvasViewportUtils";
 import { createNode, createEdge } from "@/utils/store/workflowStoreHelpers";
-import { initialEdges, initialNodes } from "@/constants/initialNodesAndEdges";
-import { ZOOM_BASELINE } from "@/constants/canvas";
+import {
+  initialEdges,
+  initialNodes,
+} from "@/constants/workflow-studio/initialNodesAndEdges";
+import { ZOOM_BASELINE } from "@/constants/workflow-studio/canvas";
 
 // Re-export constants for backward compatibility
-export { MIN_ZOOM, MAX_ZOOM, ZOOM_BASELINE } from "@/constants/canvas";
+export {
+  MIN_ZOOM,
+  MAX_ZOOM,
+  ZOOM_BASELINE,
+} from "@/constants/workflow-studio/canvas";
 
 // Create zoom action utilities
 const zoomActions = createZoomActions();

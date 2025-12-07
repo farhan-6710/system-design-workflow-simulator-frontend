@@ -7,7 +7,7 @@ import {
   MAX_SERVER_CAPACITY,
   WARNING_THRESHOLD,
   CRITICAL_THRESHOLD,
-} from "@/constants/canvas";
+} from "@/constants/workflow-studio/canvas";
 import {
   RPSValue,
   RPSRange,

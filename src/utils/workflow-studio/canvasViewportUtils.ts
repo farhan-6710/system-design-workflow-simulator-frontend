@@ -12,7 +12,7 @@ import {
   ZOOM_BASELINE,
   PAN_DISABLED_THRESHOLD,
   WORKFLOW_LAYER_INITIAL_SCALE,
-} from "@/constants/canvas";
+} from "@/constants/workflow-studio/canvas";
 
 // ============================================================================
 // Zoom Constraints

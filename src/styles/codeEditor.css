@@ -1,0 +1,162 @@
+/* Code Editor Specific Variables */
+
+@theme inline {
+  --color-code-editor-background: var(--code-editor-background);
+  --color-code-editor-backgroundTwo: var(--code-editor-backgroundTwo);
+  --color-code-editor: var(--code-editor);
+  --color-code-editor-purple: var(--code-editor-purple);
+  --color-code-editor-blue: var(--code-editor-blue);
+  --color-code-editor-red: var(--code-editor-red);
+  --color-code-editor-green: var(--code-editor-green);
+  --color-code-editor-gray: var(--code-editor-gray);
+  --color-code-editor-border: var(--code-editor-border);
+  --color-code-editor-text: var(--code-editor-text);
+  --color-code-editor-yellow: var(--code-editor-yellow);
+  --color-code-editor-orange: var(--code-editor-orange);
+  --color-code-editor-cursor: var(--code-editor-cursor);
+  --color-code-editor-selection: var(--code-editor-selection);
+  --color-code-editor-scrollbar-thumb: var(--code-editor-scrollbar-thumb);
+}
+
+:root {
+  --code-editor-background: oklch(17.169% 0.0053 248.225);
+  --code-editor-backgroundTwo: oklch(21.303% 0.00849 264.406);
+  --code-editor: oklch(1 0 0);
+  --code-editor-purple: oklch(64.881% 0.1998 318.473);
+  --code-editor-blue: oklch(67.527% 0.13719 246.807);
+  --code-editor-red: oklch(62.854% 0.17452 18.678);
+  --code-editor-green: oklch(75.568% 0.15034 133.961);
+  --code-editor-gray: oklch(59.899% 0.01637 264.48);
+  --code-editor-border: oklch(0.929 0.013 255.508);
+  --code-editor-text: oklch(0.129 0.042 264.695);
+  --code-editor-yellow: oklch(78.54% 0.13016 76.659);
+  --code-editor-orange: oklch(73.391% 0.12766 54.583);
+  --code-editor-cursor: oklch(65.217% 0.19908 258.702);
+  --code-editor-selection: oklch(28.695% 0.01371 264.406);
+  --code-editor-scrollbar-thumb: oklch(27.9% 0.01371 262.265);
+}
+
+.dark {
+  --code-editor-background: oklch(17.169% 0.0053 248.225);
+  --code-editor-backgroundTwo: oklch(21.303% 0.00849 264.406);
+  --code-editor: oklch(0.208 0.042 265.755);
+  --code-editor-purple: oklch(69.308% 0.16258 318.521);
+  --code-editor-blue: oklch(72.368% 0.11876 244.824);
+  --code-editor-red: oklch(66.216% 0.14276 16.334);
+  --code-editor-green: oklch(76.538% 0.10926 133.281);
+  --code-editor-gray: oklch(59.899% 0.01637 264.48);
+  --code-editor-border: oklch(31.206% 0.01765 262.265);
+  --code-editor-text: oklch(67.134% 0.01424 264.542);
+  --code-editor-yellow: oklch(79.769% 0.10476 75.238);
+  --code-editor-orange: oklch(74.534% 0.10265 53.915);
+  --code-editor-cursor: oklch(61.481% 0.15583 258.702);
+  --code-editor-selection: oklch(28.695% 0.01371 264.406);
+  --code-editor-scrollbar-thumb: oklch(21.755% 0.00849 262.265);
+}
+
+/* Force Ace Editor to respect our font and size */
+.ace_editor {
+  font-family: var(--font-mono) !important;
+  width: 100% !important;
+  height: 100% !important;
+  background-color: var(--code-editor-backgroundTwo);
+  color: var(
+    --color-code-editor-text
+  ) !important; /* Default Text Color (Brackets, etc.) */
+  line-height: 1.5 !important;
+}
+
+.ace_gutter {
+  background-color: var(--color-code-editor-backgroundTwo) !important;
+  color: var(--color-code-editor-gray) !important;
+  border-right: 1px solid var(--color-code-editor-border) !important;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-code-editor);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-code-editor-scrollbar-thumb);
+  border-radius: 6px;
+  border: 3px solid var(--color-code-editor);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-code-editor-gray);
+}
+
+/* --- NEW SYNTAX HIGHLIGHTING OVERRIDES --- */
+
+/* 1. KEYWORDS (Purple) */
+/* matches: const, return, function, if, else */
+.ace_keyword,
+.ace_meta,
+.ace_storage,
+.ace_storage.ace_type,
+.ace_support.ace_type {
+  color: var(--color-code-editor-purple) !important;
+}
+
+/* 2. FUNCTIONS (Blue) */
+/* matches: filter, log, warn */
+.ace_support.ace_function,
+.ace_entity.ace_name.ace_function {
+  color: var(--color-code-editor-blue) !important;
+}
+
+/* 3. VARIABLES & IDENTIFIERS (Red) */
+/* matches: b, num, a, object keys */
+.ace_identifier,
+.ace_variable,
+.ace_variable.ace_parameter,
+.ace_attribute-name,
+.ace_field {
+  color: var(--color-code-editor-red) !important;
+}
+
+/* 4. STRINGS (Green) */
+.ace_string {
+  color: var(--color-code-editor-green) !important;
+}
+
+/* 5. COMMENTS (Gray) */
+.ace_comment {
+  color: var(--color-code-editor-gray) !important;
+  font-style: italic;
+}
+
+/* 6. BUILT-INS (Yellow/Gold) */
+/* matches: console, window, true, false, null */
+.ace_support.ace_class,
+.ace_support.ace_constant,
+.ace_constant.ace_language {
+  color: var(--color-code-editor-yellow) !important;
+}
+
+/* 7. OPERATORS & PUNCTUATION (Default/White-ish) */
+/* matches: =, ;, %, () */
+.ace_operator,
+.ace_punctuation {
+  color: var(--color-code-editor-text) !important;
+}
+
+/* 8. NUMBERS (Orange/Peach) */
+/* matches: 1, 2, 0 */
+.ace_constant.ace_numeric {
+  color: var(--color-code-editor-orange) !important;
+}
+
+/* 9. CURSOR & SELECTION */
+.ace_cursor {
+  color: var(--color-code-editor-cursor) !important;
+}
+.ace_marker-layer .ace_selection {
+  background: var(--color-code-editor-selection) !important;
+}
+.ace_print-margin {
+  display: none !important;
+}

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Node } from "@/types/workflow-studio/workflow";
 import { useWorkflowStore } from "@/stores/workflowStore";
-import { nodeOptions } from "@/constants/nodeOptions";
+import { nodeOptions } from "@/constants/workflow-studio/nodeOptions";
 import { toast } from "sonner";
 
 /**

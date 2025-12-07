@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 import { Slider } from "@/components/ui/slider";
 import { ZoomIn, ZoomOut, RotateCcw } from "lucide-react";
 import { motion } from "framer-motion";
-import { internalToDisplayZoom } from "@/constants/canvas";
+import { internalToDisplayZoom } from "@/constants/workflow-studio/canvas";
 
 interface ZoomIndicatorProps {
   currentZoom: number;

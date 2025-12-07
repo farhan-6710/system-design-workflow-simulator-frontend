@@ -4,14 +4,14 @@
  */
 
 import { Node, Edge } from "@/types/workflow-studio/workflow";
-import { nodeOptions } from "@/constants/nodeOptions";
+import { nodeOptions } from "@/constants/workflow-studio/nodeOptions";
 import { v4 as uuidv4 } from "uuid";
 import {
   OUTPUT_PORT_OFFSET_X,
   OUTPUT_PORT_OFFSET_Y,
   INPUT_PORT_OFFSET_X,
   INPUT_PORT_OFFSET_Y,
-} from "@/constants/canvas";
+} from "@/constants/workflow-studio/canvas";
 
 // ============================================================================
 // ID Generation

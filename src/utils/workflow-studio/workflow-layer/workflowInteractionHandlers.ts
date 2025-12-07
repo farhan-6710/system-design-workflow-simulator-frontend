@@ -6,7 +6,10 @@
 
 import React from "react";
 import { useWorkflowStore } from "@/stores/workflowStore";
-import { OUTPUT_PORT_OFFSET_X, OUTPUT_PORT_OFFSET_Y } from "@/constants/canvas";
+import {
+  OUTPUT_PORT_OFFSET_X,
+  OUTPUT_PORT_OFFSET_Y,
+} from "@/constants/workflow-studio/canvas";
 
 // ============================================================================
 // Canvas Mouse & Touch Handlers

@@ -27,7 +27,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/constants/canvasDockItems.tsx"
+    "src/constants/workflow-studio/canvasDockItems.tsx"
   ],
   "exclude": ["node_modules"]
 }

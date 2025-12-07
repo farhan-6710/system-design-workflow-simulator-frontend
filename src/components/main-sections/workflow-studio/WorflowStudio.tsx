@@ -6,7 +6,7 @@ import { useAnnotationStore } from "@/stores/annotationStore";
 import { WorkflowProvider } from "@/contexts/WorkflowContext";
 import { CanvasControlsProvider } from "@/contexts/CanvasControlsContext";
 import { useCanvasControlsContext } from "@/contexts/CanvasControlsContext";
-import { canvasDockItems } from "@/constants/canvasDockItems";
+import { canvasDockItems } from "@/constants/workflow-studio/canvasDockItems";
 import { useWorkflowDialogs } from "@/hooks/workflow-studio/workflow-layer/useWorkflowDialogs";
 import { useWorkflowDock } from "@/hooks/workflow-studio/workflow-layer/useWorkflowDock";
 import { ConfirmationModal } from "@/components/atoms/ConfirmationModal";

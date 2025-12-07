@@ -1,5 +1,5 @@
 import { Node, NodeConfigField } from "@/types/workflow-studio/workflow";
-import { nodeOptions } from "@/constants/nodeOptions";
+import { nodeOptions } from "@/constants/workflow-studio/nodeOptions";
 
 /**
  * Result type for configuration display logic

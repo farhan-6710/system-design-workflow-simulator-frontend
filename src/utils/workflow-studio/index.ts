@@ -29,4 +29,4 @@ export {
   GRID_SIZE,
   GRID_DOT_SIZE,
   GRID_OPACITY,
-} from "@/constants/canvas";
+} from "@/constants/workflow-studio/canvas";

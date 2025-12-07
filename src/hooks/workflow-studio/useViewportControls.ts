@@ -6,7 +6,11 @@
 
 import { useCallback, useRef, useEffect, useState } from "react";
 import { useWorkflowStore } from "@/stores/workflowStore";
-import { MIN_ZOOM, MAX_ZOOM, ZOOM_SENSITIVITY } from "@/constants/canvas";
+import {
+  MIN_ZOOM,
+  MAX_ZOOM,
+  ZOOM_SENSITIVITY,
+} from "@/constants/workflow-studio/canvas";
 import {
   isInteractiveElement,
   isPinchGesture,

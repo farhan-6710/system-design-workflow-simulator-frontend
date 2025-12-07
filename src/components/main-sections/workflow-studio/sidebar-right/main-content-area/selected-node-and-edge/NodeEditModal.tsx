@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/select";
 import ConfigurationForm from "../ConfigurationForm";
 import { NodeEditModalProps } from "@/types/workflow-studio/sidebar-right/selected-node-and-edge";
-import { nodeOptions } from "@/constants/nodeOptions";
+import { nodeOptions } from "@/constants/workflow-studio/nodeOptions";
 import { getConfigurationDisplay } from "@/utils/workflow-studio/sidebar-right/configurationUtils";
 import { useNodeEditModal } from "@/hooks/workflow-studio/sidebar-right/selected-node-and-edge/useNodeDetailsView";
 

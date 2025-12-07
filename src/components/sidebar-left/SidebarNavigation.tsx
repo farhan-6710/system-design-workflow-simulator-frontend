@@ -2,27 +2,7 @@ import { motion } from "framer-motion";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
-import {
-  BarChart3,
-  CreditCard,
-  HelpCircle,
-  Home,
-  Sparkles,
-  Video,
-} from "lucide-react";
-
-const navItems = [
-  { id: "my-progress", label: "My Progress", icon: Home },
-  { id: "bug-practice", label: "Bug Practice", icon: Video },
-  { id: "system-design", label: "System Design", icon: Sparkles },
-  { id: "challenges", label: "Challenges", icon: BarChart3 },
-  {
-    id: "recruiter-assessments",
-    label: "Recruiter Assessments",
-    icon: CreditCard,
-  },
-  { id: "settings", label: "Settings", icon: HelpCircle },
-];
+import { navItems } from "@/constants/shared/sidebarLeft";
 
 const container = {
   hidden: { opacity: 0 },
