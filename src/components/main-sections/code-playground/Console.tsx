@@ -18,7 +18,7 @@ export const Console: React.FC<ConsoleProps> = ({ logs, onClear }) => {
   return (
     <div className="flex-1 flex flex-col overflow-hidden">
       {/* Console Header */}
-      <div className="px-3 py-1 border-b border-code-editor-border flex justify-between items-center select-none bg-[rgba(23,25,29,0.5)]">
+      <div className="px-3 py-1 border-b border-code-editor-border flex justify-between items-center select-none bg-code-editor-background">
         <span className="text-[10px] font-bold uppercase tracking-wider text-code-editor-blue">
           Console
         </span>
@@ -34,7 +34,7 @@ export const Console: React.FC<ConsoleProps> = ({ logs, onClear }) => {
       <div className="flex-1 overflow-y-auto p-4 font-mono text-sm space-y-1 relative">
         {logs.length === 0 && (
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
-            <span className="text-sm opacity-40 text-code-editor-gray">
+            <span className="text-sm text-code-editor-gray">
               Output will appear here...
             </span>
           </div>

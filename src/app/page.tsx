@@ -9,7 +9,7 @@ import WorkflowStudio from "@/components/main-sections/workflow-studio/WorflowSt
 import CodePlayground from "@/components/main-sections/code-playground/CodePlayground";
 
 export default function Dashboard() {
-  const [currentPage, setCurrentPage] = useState("system-design");
+  const [currentPage, setCurrentPage] = useState("my-progress");
 
   const renderPage = () => {
     switch (currentPage) {

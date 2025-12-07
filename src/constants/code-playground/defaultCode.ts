@@ -5,6 +5,4 @@ const b = a.filter((num) => {
 });
 
 console.log("Filtered Array:", b);
-console.warn("This is a warning example");
-console.error("This is an error example");
 `;

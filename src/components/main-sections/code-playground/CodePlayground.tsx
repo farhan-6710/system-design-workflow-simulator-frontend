@@ -51,7 +51,7 @@ export default function CodePlayground() {
     // Outer container: fixed viewport, no scrollbars
     <div className="p-12 flex-1 h-full flex items-center justify-center font-sans overflow-hidden text-slate-300 bg-code-editor-background">
       {/* Main Window: Fixed 90vw width and 80vh height */}
-      <div className="border border-code-editor-border w-full h-full flex flex-col overflow-hidden bg-code-editor-backgroundTwo rounded-2xl">
+      <div className="border border-border w-full h-full flex flex-col overflow-hidden bg-code-editor-backgroundTwo rounded-2xl">
         <Header onRun={handleRun} status={`${logs.length} logs`} />
 
         <div
