@@ -63,7 +63,7 @@ const LogItem = ({ log }: { log: LogEntry }) => {
         styles[log.type]
       }`}
     >
-      <pre className="whitespace-pre font-sans leading-relaxed text-foreground-muted overflow-x-auto">
+      <pre className="whitespace-pre-wrap font-sans leading-relaxed text-foreground-muted">
         {log.message.map(formatLogArgument).join(" ")}
       </pre>
     </div>
