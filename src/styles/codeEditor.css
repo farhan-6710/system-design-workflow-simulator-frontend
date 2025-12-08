@@ -31,7 +31,7 @@
   --code-editor-orange: oklch(63.277% 0.13007 52.965);
   --code-editor-cursor: oklch(65.217% 0.19908 258.702);
   --code-editor-selection: oklch(89.482% 0.0128 271.279);
-  --code-editor-scrollbar-thumb: oklch(27.9% 0.01371 262.265);
+  --code-editor-scrollbar-thumb: oklch(0.5713 0.2073 297.03);
 }
 
 .dark {
@@ -48,7 +48,7 @@
   --code-editor-orange: oklch(74.534% 0.10265 53.915);
   --code-editor-cursor: oklch(61.481% 0.15583 258.702);
   --code-editor-selection: oklch(33.811% 0.03326 268.097);
-  --code-editor-scrollbar-thumb: oklch(21.755% 0.00849 262.265);
+  --code-editor-scrollbar-thumb: oklch(0.5713 0.2073 297.03);
 }
 
 /* Force Ace Editor to respect our font and size */
@@ -71,8 +71,8 @@
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 12px;
-  height: 12px;
+  width: 4px;
+  height: 4px;
 }
 ::-webkit-scrollbar-track {
   background: var(--color-code-editor);

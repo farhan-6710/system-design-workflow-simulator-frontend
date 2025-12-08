@@ -33,7 +33,7 @@ export const SidebarHeader: React.FC<SidebarHeaderProps> = ({
           className={`overflow-hidden ${sidebarExpanded ? "block" : "hidden"}`}
         >
           <h1 className="text-xl font-bold text-slate-900 dark:text-white whitespace-nowrap">
-            System Design
+            Dev Studio
           </h1>
           <p className="text-xs text-slate-500 whitespace-nowrap">Pro Plan</p>
         </motion.div>

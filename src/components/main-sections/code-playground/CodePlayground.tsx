@@ -2,6 +2,8 @@
 
 import React, { useRef, useCallback } from "react";
 import type { Ace } from "ace-builds";
+import { motion } from "framer-motion";
+import { Card } from "@/components/ui/card";
 import { useConsole } from "@/hooks/code-playground/useConsole";
 import { useResizable } from "@/hooks/code-playground/useResizable";
 import { DEFAULT_CODE } from "@/constants/code-playground/defaultCode";
@@ -49,44 +51,63 @@ export default function CodePlayground() {
 
   return (
     // Outer container: fixed viewport, no scrollbars
-    <div className="p-12 flex-1 h-full flex items-center justify-center font-sans overflow-hidden text-slate-300 bg-code-editor-background">
-      {/* Main Window: Fixed 90vw width and 80vh height */}
-      <div className="border border-border w-full h-full flex flex-col overflow-hidden bg-code-editor-backgroundTwo rounded-2xl">
-        <Header onRun={handleRun} status={`${logs.length} logs`} />
+    <div className="p-6 flex-1 h-full flex flex-col font-sans overflow-hidden bg-background">
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="mb-6"
+      >
+        <h1 className="text-3xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+          Code Playground
+        </h1>
+        <p className="text-slate-600 dark:text-slate-400 mt-1">
+          Experiment with JavaScript code in real-time.
+        </p>
+      </motion.div>
 
-        <div
-          ref={containerRef}
-          className="flex-1 flex flex-col min-h-0 relative"
-          id="split-container"
-        >
-          {/* Top: Editor */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 0.1, duration: 0.4 }}
+        className="flex-1 min-h-0"
+      >
+        <Card className="w-full h-full flex flex-col overflow-hidden border-border bg-card/50 backdrop-blur-sm shadow-xl p-0 gap-0">
+          <Header onRun={handleRun} status={`${logs.length} logs`} />
+
           <div
-            className="relative min-h-[50px]"
-            style={{
-              height: `${heightPercent}%`,
-              pointerEvents: isDragging.current ? "none" : "auto",
-            }}
+            ref={containerRef}
+            className="flex-1 flex flex-col min-h-0 relative"
+            id="split-container"
           >
-            <Editor
-              initialCode={DEFAULT_CODE}
-              onChange={handleCodeChange}
-              editorRef={editorInstance}
-            />
-          </div>
+            {/* Top: Editor */}
+            <div
+              className="relative min-h-[50px]"
+              style={{
+                height: `${heightPercent}%`,
+                pointerEvents: isDragging.current ? "none" : "auto",
+              }}
+            >
+              <Editor
+                initialCode={DEFAULT_CODE}
+                onChange={handleCodeChange}
+                editorRef={editorInstance}
+              />
+            </div>
 
-          {/* Resizer Handle */}
-          <div
-            id="resizer"
-            onMouseDown={startDrag}
-            className="h-3 border-y border-code-editor-border cursor-row-resize flex items-center justify-center z-50 hover:bg-code-editor/80 group shrink-0"
-          >
-            <div className="w-10 h-1 bg-code-editor-border rounded-sm transition-all duration-200 group-hover:w-[50px] group-hover:bg-code-editor-blue" />
-          </div>
+            {/* Resizer Handle */}
+            <div
+              id="resizer"
+              onMouseDown={startDrag}
+              className="h-3 border-y border-border cursor-row-resize flex items-center justify-center z-50 hover:bg-accent/50 group shrink-0 transition-colors"
+            >
+              <div className="w-10 h-1 bg-border rounded-full transition-all duration-200 group-hover:w-16 group-hover:bg-primary/50" />
+            </div>
 
-          {/* Bottom: Console */}
-          <Console logs={logs} onClear={clearLogs} />
-        </div>
-      </div>
+            {/* Bottom: Console */}
+            <Console logs={logs} onClear={clearLogs} />
+          </div>
+        </Card>
+      </motion.div>
     </div>
   );
 }

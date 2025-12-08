@@ -4,12 +4,12 @@ import {
   HelpCircle,
   Home,
   Sparkles,
-  Video,
+  Code,
 } from "lucide-react";
 
 export const navItems = [
   { id: "my-progress", label: "My Progress", icon: Home },
-  { id: "code-playground", label: "Code Playground", icon: Video },
+  { id: "code-playground", label: "Code Playground", icon: Code },
   { id: "system-design", label: "System Design", icon: Sparkles },
   { id: "challenges", label: "Challenges", icon: BarChart3 },
   {

@@ -18,23 +18,23 @@ export const Console: React.FC<ConsoleProps> = ({ logs, onClear }) => {
   return (
     <div className="flex-1 flex flex-col overflow-hidden">
       {/* Console Header */}
-      <div className="px-3 py-1 border-b border-code-editor-border flex justify-between items-center select-none bg-code-editor-background">
-        <span className="text-[10px] font-bold uppercase tracking-wider text-code-editor-blue">
+      <div className="px-4 py-2 border-b border-border flex justify-between items-center select-none bg-background">
+        <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
           Console
         </span>
         <button
           onClick={onClear}
-          className="text-[10px] text-code-editor-red hover:opacity-100 opacity-60 transition-opacity"
+          className="text-[10px] text-red-400 hover:text-red-500 hover:bg-red-500/10 px-2 py-0.5 rounded transition-all"
         >
           Clear
         </button>
       </div>
 
       {/* Logs Output */}
-      <div className="flex-1 overflow-y-auto p-4 font-mono text-sm space-y-1 relative">
+      <div className="flex-1 overflow-y-auto p-4 font-mono text-sm space-y-1 relative bg-card/30">
         {logs.length === 0 && (
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
-            <span className="text-sm text-code-editor-gray">
+            <span className="text-sm text-muted-foreground/50">
               Output will appear here...
             </span>
           </div>
@@ -51,20 +51,19 @@ export const Console: React.FC<ConsoleProps> = ({ logs, onClear }) => {
 
 const LogItem = ({ log }: { log: LogEntry }) => {
   const styles = {
-    log: "text-[#abb2bf] border-code-editor-gray",
-    error:
-      "text-code-editor-red border-code-editor-red bg-[rgba(220,106,116,0.1)]",
-    warn: "text-[#e5c07b] border-[#e5c07b] bg-[rgba(229,192,123,0.1)]",
-    info: "text-code-editor-blue border-code-editor-blue bg-[rgba(96,173,235,0.1)]",
+    log: "text-slate-300 border-slate-600",
+    error: "text-red-400 border-red-500/50 bg-red-500/10",
+    warn: "text-yellow-400 border-yellow-500/50 bg-yellow-500/10",
+    info: "text-blue-400 border-blue-500/50 bg-blue-500/10",
   };
 
   return (
     <div
-      className={`pl-3 py-1 mb-1 text-sm font-mono border-l-2 hover:bg-[#2c313a] transition-colors ${
+      className={`pl-3 py-1 mb-1 text-sm font-mono border-l-2 hover:bg-white/5 transition-colors rounded-r ${
         styles[log.type]
       }`}
     >
-      <pre className="whitespace-pre-wrap font-sans leading-relaxed">
+      <pre className="whitespace-pre font-sans leading-relaxed text-foreground-muted overflow-x-auto">
         {log.message.map(formatLogArgument).join(" ")}
       </pre>
     </div>

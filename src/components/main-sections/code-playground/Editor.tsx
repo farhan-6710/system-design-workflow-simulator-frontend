@@ -34,7 +34,9 @@ export const Editor: React.FC<EditorProps> = ({
       // Override styles via CSS in globals.css, but we set the ID here
       const editor = ace.edit("editor");
       editor.setTheme("ace/theme/one_dark");
+      editor.container.style.background = "transparent";
       editor.session.setMode("ace/mode/javascript");
+      editor.renderer.setScrollMargin(10, 10);
 
       editor.setOptions({
         fontSize: "14px",

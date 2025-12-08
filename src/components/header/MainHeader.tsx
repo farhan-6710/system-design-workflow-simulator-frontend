@@ -2,8 +2,9 @@
 
 import React, { useState } from "react";
 import { Button } from "../ui/button";
+import { Badge } from "../ui/badge";
 import { ModeToggle } from "../extras/ModeToggele";
-import { Badge, Bell, Menu } from "lucide-react";
+import { Bell, Menu } from "lucide-react";
 import { UserAvatar } from "../auth/UserAvatar";
 import { AuthDialog } from "../auth/AuthDialog";
 import { useAuth } from "@/contexts/authContext";
@@ -26,7 +27,7 @@ const MainHeader: React.FC<HeaderProps> = ({ onToggle }) => {
         <ModeToggle />
         <Button variant="ghost" size="icon" className="relative">
           <Bell className="w-5 h-5" />
-          <Badge className="absolute -top-1 -right-1 w-5 h-5 p-0 flex items-center justify-center bg-red-500 text-white">
+          <Badge className="absolute -top-1 -right-1 w-5 h-5 p-0 flex items-center justify-center bg-red-500 text-white rounded-full">
             3
           </Badge>
         </Button>

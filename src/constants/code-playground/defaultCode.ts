@@ -1,8 +1,12 @@
-export const DEFAULT_CODE = `const a = [1, 2, 3, 4];
+export const DEFAULT_CODE = `const users = [
+  { id: 2, name: "Bob", age: 27 },
+  { id: 4, name: "Diana", age: 31 },
+  { id: 3, name: "Charlie", age: 29 },
+  { id: 1, name: "Alice", age: 24 },
+];
 
-const b = a.filter((num) => {
-  return num % 2 === 0;
+const sortedUsers = [...users].sort((a, b) => {
+  return a.id - b.id;
 });
 
-console.log("Filtered Array:", b);
-`;
+console.log(sortedUsers);`;
