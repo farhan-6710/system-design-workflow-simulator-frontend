@@ -9,7 +9,11 @@ interface EditorProps {
   editorRef: React.MutableRefObject<Ace.Editor | null>;
 }
 
-export const Editor: React.FC<EditorProps> = ({ initialCode, onChange, editorRef }) => {
+export const Editor: React.FC<EditorProps> = ({
+  initialCode,
+  onChange,
+  editorRef,
+}) => {
   useEffect(() => {
     // Dynamically load Ace and Theme/Mode to avoid SSR issues
     const initEditor = async () => {
@@ -17,11 +21,21 @@ export const Editor: React.FC<EditorProps> = ({ initialCode, onChange, editorRef
       await import("ace-builds/src-noconflict/mode-javascript");
       await import("ace-builds/src-noconflict/theme-one_dark");
 
+      // Configure Ace to load modules from CDN to avoid worker issues
+      ace.config.set(
+        "basePath",
+        "https://cdn.jsdelivr.net/npm/ace-builds@1.32.0/src-noconflict/"
+      );
+      ace.config.set(
+        "workerPath",
+        "https://cdn.jsdelivr.net/npm/ace-builds@1.32.0/src-noconflict/"
+      );
+
       // Override styles via CSS in globals.css, but we set the ID here
       const editor = ace.edit("editor");
       editor.setTheme("ace/theme/one_dark");
       editor.session.setMode("ace/mode/javascript");
-      
+
       editor.setOptions({
         fontSize: "14px",
         fontFamily: '"JetBrains Mono", Menlo, monospace',
@@ -32,7 +46,7 @@ export const Editor: React.FC<EditorProps> = ({ initialCode, onChange, editorRef
       });
 
       editor.setValue(initialCode, -1);
-      
+
       editor.on("change", () => {
         onChange(editor.getValue());
       });
@@ -43,8 +57,8 @@ export const Editor: React.FC<EditorProps> = ({ initialCode, onChange, editorRef
     initEditor();
 
     return () => {
-        // Cleanup if necessary
-    }
+      // Cleanup if necessary
+    };
   }, [editorRef, initialCode, onChange]);
 
   // Important: The styles for .ace_editor are in globals.css
