@@ -28,7 +28,8 @@ export default function CodePlayground() {
 
   const handleCodeChange = useCallback((val: string) => {
     codeRef.current = val;
-  }, []);
+    clearLogs();
+  }, [clearLogs]);
 
   const handleRun = () => {
     clearLogs();

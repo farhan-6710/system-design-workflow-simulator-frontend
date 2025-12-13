@@ -27,9 +27,9 @@ export function MainLayout({
   // Auto-collapse sidebar when navigating to system-design
   useEffect(() => {
     if (currentPage === "system-design") {
-      setSidebarExpanded(false);
+      // setSidebarExpanded(false);
       setSidebarRightExpanded(true);
-      setSelectedTab("add-node");
+      setSelectedTab("ai-assistant");
     }
   }, [currentPage, setSidebarRightExpanded, setSelectedTab]);
 
