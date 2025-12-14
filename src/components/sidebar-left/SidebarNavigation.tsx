@@ -16,14 +16,14 @@ const container = {
 };
 
 interface SidebarNavigationProps {
-  sidebarExpanded: boolean;
+  isSidebarLeftExpanded: boolean;
   showTooltips: boolean;
   currentPage: string;
   onNavigate: (page: string) => void;
 }
 
 export const SidebarNavigation: React.FC<SidebarNavigationProps> = ({
-  sidebarExpanded,
+  isSidebarLeftExpanded,
   showTooltips,
   currentPage,
   onNavigate,
@@ -34,7 +34,7 @@ export const SidebarNavigation: React.FC<SidebarNavigationProps> = ({
       initial="hidden"
       animate="show"
       className={`flex-1 px-3 py-4 space-y-2 overflow-y-auto flex flex-col transition-all ${
-        sidebarExpanded
+        isSidebarLeftExpanded
           ? "items-start duration-200"
           : "items-start duration-200 delay-300"
       }`}
@@ -45,15 +45,15 @@ export const SidebarNavigation: React.FC<SidebarNavigationProps> = ({
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.3 + index * 0.1, duration: 0.4 }}
-          className={`${sidebarExpanded ? "w-full" : "w-fit"}`}
+          className={`${isSidebarLeftExpanded ? "w-full" : "w-fit"}`}
         >
-          <Tooltip key={`${navItem.id}-${sidebarExpanded}-${showTooltips}`}>
+          <Tooltip key={`${navItem.id}-${isSidebarLeftExpanded}-${showTooltips}`}>
             <TooltipTrigger asChild>
               <Button
                 variant={currentPage === navItem.id ? "default" : "ghost"}
                 className={cn(
                   "h-11 rounded-xl",
-                  sidebarExpanded
+                  isSidebarLeftExpanded
                     ? "justify-start gap-3 w-full !px-6"
                     : "justify-center gap-0 w-12 px-0",
                   currentPage === navItem.id &&
@@ -65,22 +65,22 @@ export const SidebarNavigation: React.FC<SidebarNavigationProps> = ({
                 <motion.span
                   initial={false}
                   animate={{
-                    opacity: sidebarExpanded ? 1 : 0,
-                    x: sidebarExpanded ? 0 : -10,
+                    opacity: isSidebarLeftExpanded ? 1 : 0,
+                    x: isSidebarLeftExpanded ? 0 : -10,
                   }}
                   transition={{
                     duration: 0.2,
-                    delay: sidebarExpanded ? 0.15 : 0,
+                    delay: isSidebarLeftExpanded ? 0.15 : 0,
                   }}
                   className={`whitespace-nowrap font-semibold text-md ${
-                    sidebarExpanded ? "block" : "hidden"
+                    isSidebarLeftExpanded ? "block" : "hidden"
                   }`}
                 >
                   {navItem.label}
                 </motion.span>
               </Button>
             </TooltipTrigger>
-            {!sidebarExpanded && showTooltips && (
+            {!isSidebarLeftExpanded && showTooltips && (
               <TooltipContent side="right">
                 <p>{navItem.label}</p>
               </TooltipContent>

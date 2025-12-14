@@ -18,11 +18,11 @@ import { getUserInitials, getUserDisplayName } from "@/utils/auth/userUtils";
 import { toast } from "sonner";
 
 interface SidebarFooterProps {
-  sidebarExpanded: boolean;
+  isSidebarLeftExpanded: boolean;
 }
 
 export const SidebarFooter: React.FC<SidebarFooterProps> = ({
-  sidebarExpanded,
+  isSidebarLeftExpanded,
 }) => {
   const { user, loading, signOut } = useAuth();
   const [authDialogOpen, setAuthDialogOpen] = useState(false);
@@ -69,12 +69,12 @@ export const SidebarFooter: React.FC<SidebarFooterProps> = ({
         <Button
           onClick={() => setAuthDialogOpen(true)}
           className={`${
-            sidebarExpanded
+            isSidebarLeftExpanded
               ? "w-full justify-center h-9 px-3"
               : "w-10 h-10 p-0 justify-center"
           } bg-primary hover:bg-gradient-primary/70 text-white cursor-pointer rounded-lg`}
         >
-          {sidebarExpanded ? "Get Started" : "GS"}
+          {isSidebarLeftExpanded ? "Get Started" : "GS"}
         </Button>
         <AuthDialog open={authDialogOpen} onOpenChange={setAuthDialogOpen} />
       </motion.div>
@@ -93,14 +93,14 @@ export const SidebarFooter: React.FC<SidebarFooterProps> = ({
           <Button
             variant="ghost"
             className={`${
-              sidebarExpanded
+              isSidebarLeftExpanded
                 ? "w-full justify-between h-9 px-3"
                 : "w-10 h-10 p-0 justify-center"
             } rounded-lg hover:bg-slate-100 dark:hover:bg-gray-800 transition-colors`}
           >
             <div
               className={`flex items-center ${
-                sidebarExpanded ? "gap-2.5" : "justify-center"
+                isSidebarLeftExpanded ? "gap-2.5" : "justify-center"
               }`}
             >
               <Avatar className="w-7 h-7">
@@ -108,7 +108,7 @@ export const SidebarFooter: React.FC<SidebarFooterProps> = ({
                   {getUserInitials(user)}
                 </AvatarFallback>
               </Avatar>
-              {sidebarExpanded && (
+              {isSidebarLeftExpanded && (
                 <div className="flex flex-col items-start">
                   <span className="text-sm font-medium text-slate-900 dark:text-white">
                     {getUserDisplayName(user)}
@@ -119,13 +119,13 @@ export const SidebarFooter: React.FC<SidebarFooterProps> = ({
                 </div>
               )}
             </div>
-            {sidebarExpanded && (
+            {isSidebarLeftExpanded && (
               <ChevronUp className="w-4 h-4 text-slate-500 dark:text-gray-400" />
             )}
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent
-          align={sidebarExpanded ? "end" : "start"}
+          align={isSidebarLeftExpanded ? "end" : "start"}
           className="w-52"
         >
           <DropdownMenuItem>

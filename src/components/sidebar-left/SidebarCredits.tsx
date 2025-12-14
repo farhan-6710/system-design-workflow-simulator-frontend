@@ -4,17 +4,17 @@ import { Button } from "../ui/button";
 import { useState } from "react";
 
 interface SidebarCreditsProps {
-  sidebarExpanded: boolean;
+  isSidebarLeftExpanded: boolean;
 }
 
 export const SidebarCredits: React.FC<SidebarCreditsProps> = ({
-  sidebarExpanded,
+  isSidebarLeftExpanded,
 }) => {
   const [credits] = useState(850);
 
   return (
     <>
-      {sidebarExpanded && (
+      {isSidebarLeftExpanded && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
