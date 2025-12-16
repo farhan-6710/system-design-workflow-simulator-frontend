@@ -39,7 +39,7 @@ const SidebarLeft: React.FC<SidebarLeftProps> = ({
       initial={false}
       animate={isSidebarLeftExpanded ? "expanded" : "collapsed"}
       variants={variants}
-      transition={{ duration: 0.25, ease: "easeInOut" }}
+      transition={{ duration: 0.5, ease: [0.32, 0.72, 0, 1] }}
       className={cn(
         "bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 flex flex-col z-20",
         isMobile ? "fixed left-0 top-0 bottom-0 z-50 h-full shadow-2xl" : "relative"

@@ -6,57 +6,65 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import MainHeader from "../components/header/MainHeader";
 import { useWorkflowStore } from "@/stores/workflowStore";
 
-import { useMediaQuery } from "@/hooks/use-media-query";
-
 interface MainLayoutProps {
   children: React.ReactNode;
   currentPage: string;
   onNavigate: (page: string) => void;
 }
 
+const getIsMobile = () => {
+  if (typeof window === "undefined") return false;
+  return window.innerWidth <= 1023;
+};
+
 export function MainLayout({
   children,
   currentPage,
   onNavigate,
 }: MainLayoutProps) {
-  const isMobile = useMediaQuery("(max-width: 1023px)");
+  // ✅ initialize correctly before first paint
+  const [isMounted, setIsMounted] = useState(false);
   const [isSidebarLeftExpanded, setSidebarLeftExpanded] = useState(true);
+  console.log("isSidebarLeftExpanded:", isSidebarLeftExpanded);
 
-  // Collapse sidebar automatically on mobile
   useEffect(() => {
-    if (isMobile) {
-      setSidebarLeftExpanded(false);
-    } else {
-      setSidebarLeftExpanded(true);
-    }
-  }, [isMobile]);
+    setIsMounted(true);
+
+    const isMobile = window.innerWidth <= 1023;
+    setSidebarLeftExpanded(!isMobile);
+  }, []);
+
 
   const setSidebarRightExpanded = useWorkflowStore(
     (state) => state.setSidebarRightExpanded
   );
   const setSelectedTab = useWorkflowStore((state) => state.setSelectedTab);
 
-  // Auto-collapse sidebar when navigating to system-design
+  // Auto-expand right sidebar on system-design
   useEffect(() => {
     if (currentPage === "system-design") {
-      // setSidebarLeftExpanded(false);
       setSidebarRightExpanded(true);
       setSelectedTab("ai-assistant");
     }
   }, [currentPage, setSidebarRightExpanded, setSelectedTab]);
 
   const handleToggleSidebar = () => {
-    setSidebarLeftExpanded(!isSidebarLeftExpanded);
+    setSidebarLeftExpanded((prev) => !prev);
   };
 
-  // Simple: show tooltips when sidebar is collapsed
+
+  if (!isMounted) {
+    // ✅ Server HTML === Client first render
+    return null;
+  }
+
   const showTooltips = !isSidebarLeftExpanded;
 
   return (
     <TooltipProvider delayDuration={300}>
       <div className="flex h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-950 dark:to-slate-900">
         {/* Mobile Sidebar Overlay */}
-        {isMobile && (
+        {getIsMobile() && (
           <div
             className={`fixed inset-0 z-40 bg-black transition-opacity duration-300 ${
               isSidebarLeftExpanded
@@ -73,14 +81,13 @@ export function MainLayout({
           currentPage={currentPage}
           onNavigate={onNavigate}
           handleToggleSidebar={handleToggleSidebar}
-          isMobile={isMobile}
+          isMobile={getIsMobile()}
         />
 
         <div className="flex-1 flex flex-col overflow-hidden w-full">
           <MainHeader onToggle={handleToggleSidebar} />
           <main className="flex-1 overflow-auto">{children}</main>
         </div>
-        
       </div>
     </TooltipProvider>
   );
