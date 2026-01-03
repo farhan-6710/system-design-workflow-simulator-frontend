@@ -1,30 +1,26 @@
 "use client";
 
 import { useState } from "react";
-import { DashboardView } from "@/components/main-sections/dashboard/DashboardView";
-import { AIResearchView } from "@/components/main-sections/ai-assistant/AIResearchView";
-import { AnalyticsView } from "@/components/main-sections/analytics/AnalyticsView";
 import { MainLayout } from "@/app/MainLayout";
 import WorkflowStudio from "@/components/main-sections/workflow-studio/WorflowStudio";
-import CodePlayground from "@/components/main-sections/code-playground/CodePlayground";
 
 export default function Dashboard() {
-  const [currentPage, setCurrentPage] = useState("my-progress");
+  const [currentPage, setCurrentPage] = useState("system-design");
 
   const renderPage = () => {
     switch (currentPage) {
       case "my-progress":
-        return <DashboardView onNavigate={setCurrentPage} />;
+        return <WorkflowStudio />;
       case "code-playground":
-        return <CodePlayground />;
+        return <WorkflowStudio />;
       case "system-design":
         return <WorkflowStudio />;
       case "challenges":
-        return <AnalyticsView />;
+        return <WorkflowStudio />;
       case "recruiter-assessment":
-        return <AIResearchView />;
+        return <WorkflowStudio />;
       case "settings":
-        return <AnalyticsView />;
+        return <WorkflowStudio />;
       default:
         return <WorkflowStudio />;
     }

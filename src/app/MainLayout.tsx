@@ -34,24 +34,22 @@ export function MainLayout({
     setSidebarLeftExpanded(!isMobile);
   }, []);
 
-
   const setSidebarRightExpanded = useWorkflowStore(
     (state) => state.setSidebarRightExpanded
   );
   const setSelectedTab = useWorkflowStore((state) => state.setSelectedTab);
 
   // Auto-expand right sidebar on system-design
-  useEffect(() => {
-    if (currentPage === "system-design") {
-      setSidebarRightExpanded(true);
-      setSelectedTab("ai-assistant");
-    }
-  }, [currentPage, setSidebarRightExpanded, setSelectedTab]);
+  // useEffect(() => {
+  //   if (currentPage === "system-design") {
+  //     setSidebarRightExpanded(true);
+  //     setSelectedTab("ai-assistant");
+  //   }
+  // }, [currentPage, setSidebarRightExpanded, setSelectedTab]);
 
   const handleToggleSidebar = () => {
     setSidebarLeftExpanded((prev) => !prev);
   };
-
 
   if (!isMounted) {
     // ✅ Server HTML === Client first render
