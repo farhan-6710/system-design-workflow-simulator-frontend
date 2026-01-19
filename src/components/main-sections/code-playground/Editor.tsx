@@ -1,12 +1,10 @@
-import React, { useEffect } from "react";
-// We need to import ace-builds for types, but initialization happens dynamically
-import "ace-builds/src-noconflict/ace";
-import type { Ace } from "ace-builds";
+import React, { useRef } from "react";
+import MonacoEditor, { OnMount, BeforeMount } from "@monaco-editor/react";
 
 interface EditorProps {
   initialCode: string;
   onChange: (val: string) => void;
-  editorRef: React.MutableRefObject<Ace.Editor | null>;
+  editorRef: React.MutableRefObject<any | null>;
 }
 
 export const Editor: React.FC<EditorProps> = ({
@@ -14,55 +12,65 @@ export const Editor: React.FC<EditorProps> = ({
   onChange,
   editorRef,
 }) => {
-  useEffect(() => {
-    // Dynamically load Ace and Theme/Mode to avoid SSR issues
-    const initEditor = async () => {
-      const ace = (await import("ace-builds")).default;
-      await import("ace-builds/src-noconflict/mode-javascript");
-      await import("ace-builds/src-noconflict/theme-one_dark");
+  const monacoRef = useRef<any>(null);
 
-      // Configure Ace to load modules from CDN to avoid worker issues
-      ace.config.set(
-        "basePath",
-        "https://cdn.jsdelivr.net/npm/ace-builds@1.32.0/src-noconflict/"
-      );
-      ace.config.set(
-        "workerPath",
-        "https://cdn.jsdelivr.net/npm/ace-builds@1.32.0/src-noconflict/"
-      );
+  const handleEditorDidMount: OnMount = (editor, monaco) => {
+    editorRef.current = editor;
+    monacoRef.current = monaco;
+  };
 
-      // Override styles via CSS in globals.css, but we set the ID here
-      const editor = ace.edit("editor");
-      editor.setTheme("ace/theme/one_dark");
-      editor.container.style.background = "transparent";
-      editor.session.setMode("ace/mode/javascript");
-      editor.renderer.setScrollMargin(10, 10);
+  const handleBeforeMount: BeforeMount = (monaco) => {
+    // Define a custom theme that matches the reference image (Blue/Purple style)
+    monaco.editor.defineTheme("vidforge-dark", {
+  base: "vs-dark",
+  inherit: true,
+  rules: [
+    { token: "keyword", foreground: "79c0ff" },
+    { token: "type", foreground: "79c0ff" },
+    { token: "string", foreground: "ffa657" },
+    { token: "number", foreground: "79c0ff" },
+    { token: "identifier", foreground: "e6edf3" },
+    { token: "identifier.function", foreground: "79c0ff" },
+    { token: "delimiter", foreground: "e6edf3" },
+    { token: "comment", foreground: "8b949e" },
+    { token: "variable.parameter", foreground: "ffa657" },
+  ],
+  colors: {
+    "editor.background": "#00000000",
+    "editor.lineHighlightBackground": "#ffffff0a",
+    "editorCursor.foreground": "#e6edf3",
+    "editor.selectionBackground": "#1f6feb40",
+  },
+});
 
-      editor.setOptions({
-        fontSize: "14px",
-        fontFamily: '"JetBrains Mono", Menlo, monospace',
-        showPrintMargin: false,
-        fixedWidthGutter: true,
-        displayIndentGuides: true,
-        scrollPastEnd: 0.5,
-      });
+  };
 
-      editor.setValue(initialCode, -1);
+  const handleEditorChange = (value: string | undefined) => {
+    onChange(value || "");
+  };
 
-      editor.on("change", () => {
-        onChange(editor.getValue());
-      });
-
-      editorRef.current = editor;
-    };
-
-    initEditor();
-
-    return () => {
-      // Cleanup if necessary
-    };
-  }, [editorRef, initialCode, onChange]);
-
-  // Important: The styles for .ace_editor are in globals.css
-  return <div id="editor" className="absolute inset-0" />;
+  return (
+    <div className="h-full w-full">
+      <MonacoEditor
+        height="100%"
+        defaultLanguage="javascript"
+        defaultValue={initialCode}
+        theme="vidforge-dark"
+        beforeMount={handleBeforeMount}
+        onMount={handleEditorDidMount}
+        onChange={handleEditorChange}
+        options={{
+          minimap: { enabled: false },
+          fontSize: 14,
+          fontFamily: '"JetBrains Mono", Menlo, monospace',
+          scrollBeyondLastLine: false,
+          automaticLayout: true,
+          padding: { top: 16, bottom: 16 },
+          roundedSelection: false,
+          cursorStyle: "line",
+          contextmenu: false,
+        }}
+      />
+    </div>
+  );
 };

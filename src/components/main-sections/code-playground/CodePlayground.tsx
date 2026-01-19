@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useRef, useCallback } from "react";
-import type { Ace } from "ace-builds";
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
 import { useConsole } from "@/hooks/code-playground/useConsole";
@@ -13,23 +12,21 @@ import { Console } from "./Console";
 
 export default function CodePlayground() {
   const { logs, addLog, clearLogs } = useConsole();
-  const { heightPercent, containerRef, startDrag, isDragging } =
-    useResizable(60);
+  const { size, containerRef, startDrag, isDragging } = useResizable(
+    50,
+    "horizontal",
+  );
 
-  const editorInstance = useRef<Ace.Editor | null>(null);
+  const editorInstance = useRef<any | null>(null);
   const codeRef = useRef(DEFAULT_CODE);
 
-  // Resize the Ace editor when the split pane size changes
-  React.useEffect(() => {
-    if (editorInstance.current) {
-      editorInstance.current.resize();
-    }
-  }, [heightPercent]);
-
-  const handleCodeChange = useCallback((val: string) => {
-    codeRef.current = val;
-    clearLogs();
-  }, [clearLogs]);
+  const handleCodeChange = useCallback(
+    (val: string) => {
+      codeRef.current = val;
+      clearLogs();
+    },
+    [clearLogs],
+  );
 
   const handleRun = () => {
     clearLogs();
@@ -77,14 +74,14 @@ export default function CodePlayground() {
 
           <div
             ref={containerRef}
-            className="flex-1 flex flex-col min-h-0 relative"
+            className="flex-1 flex flex-row min-h-0 relative"
             id="split-container"
           >
-            {/* Top: Editor */}
+            {/* Left: Editor */}
             <div
-              className="relative min-h-[50px]"
+              className="relative min-w-[200px]"
               style={{
-                height: `${heightPercent}%`,
+                width: `${size}%`,
                 pointerEvents: isDragging.current ? "none" : "auto",
               }}
             >
@@ -99,13 +96,13 @@ export default function CodePlayground() {
             <div
               id="resizer"
               onMouseDown={startDrag}
-              className="h-3 border-y border-border cursor-row-resize flex items-center justify-center z-50 hover:bg-accent/50 group shrink-0 transition-colors"
-            >
-              <div className="w-10 h-1 bg-border rounded-full transition-all duration-200 group-hover:w-16 group-hover:bg-primary/50" />
-            </div>
+              className="w-1 hover:w-2 border-x border-border/50 cursor-col-resize flex items-center justify-center z-50 bg-background hover:bg-primary/20 transition-all delay-75 duration-300"
+            />
 
-            {/* Bottom: Console */}
-            <Console logs={logs} onClear={clearLogs} />
+            {/* Right: Console */}
+            <div className="flex-1 min-w-0 bg-background">
+              <Console logs={logs} onClear={clearLogs} />
+            </div>
           </div>
         </Card>
       </motion.div>
