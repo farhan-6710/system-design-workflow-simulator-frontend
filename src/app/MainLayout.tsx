@@ -24,28 +24,28 @@ export function MainLayout({
 }: MainLayoutProps) {
   // ✅ initialize correctly before first paint
   const [isMounted, setIsMounted] = useState(false);
-  const [isSidebarLeftExpanded, setSidebarLeftExpanded] = useState(true);
+  const [isSidebarLeftExpanded, setSidebarLeftExpanded] = useState(false);
   console.log("isSidebarLeftExpanded:", isSidebarLeftExpanded);
 
   useEffect(() => {
     setIsMounted(true);
 
-    const isMobile = window.innerWidth <= 1023;
-    setSidebarLeftExpanded(!isMobile);
+    // const isMobile = window.innerWidth <= 1023;
+    // setSidebarLeftExpanded(!isMobile);
   }, []);
 
   const setSidebarRightExpanded = useWorkflowStore(
-    (state) => state.setSidebarRightExpanded
+    (state) => state.setSidebarRightExpanded,
   );
   const setSelectedTab = useWorkflowStore((state) => state.setSelectedTab);
 
   // Auto-expand right sidebar on system-design
-  // useEffect(() => {
-  //   if (currentPage === "system-design") {
-  //     setSidebarRightExpanded(true);
-  //     setSelectedTab("ai-assistant");
-  //   }
-  // }, [currentPage, setSidebarRightExpanded, setSelectedTab]);
+  useEffect(() => {
+    if (currentPage === "system-design") {
+      setSidebarRightExpanded(true);
+      setSelectedTab("ai-assistant");
+    }
+  }, [currentPage, setSidebarRightExpanded, setSelectedTab]);
 
   const handleToggleSidebar = () => {
     setSidebarLeftExpanded((prev) => !prev);

@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, useEffect } from "react";
 import { SvgDefinitions } from "./SvgDefinitions";
 import { WorkflowNode } from "./WorkflowNode";
 import { WorkflowEdge } from "./WorkflowEdge";
@@ -25,6 +25,10 @@ export const WorkflowLayer = forwardRef<HTMLDivElement, WorkflowLayerProps>(
     const draggingNode = useWorkflowStore((state) => state.draggingNode);
     const runCode = useWorkflowStore((state) => state.runCode);
     const { globalAnimationStyle } = useWorkflowAnimation();
+
+    useEffect(() => {
+      nodeHandlers.onSelect(nodes[1].id);
+    }, []);
 
     // Calculate dynamic bounds for the SVG based on node positions
     const calculateSVGBounds = () => {
@@ -120,6 +124,6 @@ export const WorkflowLayer = forwardRef<HTMLDivElement, WorkflowLayerProps>(
         </div>
       </div>
     );
-  }
+  },
 );
 WorkflowLayer.displayName = "WorkflowLayer";
