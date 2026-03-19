@@ -1,10 +1,13 @@
 import React, { useRef } from "react";
 import MonacoEditor, { OnMount, BeforeMount } from "@monaco-editor/react";
+import type { editor } from "monaco-editor";
+
+export type EditorInstance = editor.IStandaloneCodeEditor;
 
 interface EditorProps {
   initialCode: string;
   onChange: (val: string) => void;
-  editorRef: React.MutableRefObject<any | null>;
+  editorRef: React.MutableRefObject<EditorInstance | null>;
 }
 
 export const Editor: React.FC<EditorProps> = ({
@@ -12,7 +15,7 @@ export const Editor: React.FC<EditorProps> = ({
   onChange,
   editorRef,
 }) => {
-  const monacoRef = useRef<any>(null);
+  const monacoRef = useRef<Parameters<BeforeMount>[0] | null>(null);
 
   const handleEditorDidMount: OnMount = (editor, monaco) => {
     editorRef.current = editor;
@@ -22,27 +25,26 @@ export const Editor: React.FC<EditorProps> = ({
   const handleBeforeMount: BeforeMount = (monaco) => {
     // Define a custom theme that matches the reference image (Blue/Purple style)
     monaco.editor.defineTheme("vidforge-dark", {
-  base: "vs-dark",
-  inherit: true,
-  rules: [
-    { token: "keyword", foreground: "79c0ff" },
-    { token: "type", foreground: "79c0ff" },
-    { token: "string", foreground: "ffa657" },
-    { token: "number", foreground: "79c0ff" },
-    { token: "identifier", foreground: "e6edf3" },
-    { token: "identifier.function", foreground: "79c0ff" },
-    { token: "delimiter", foreground: "e6edf3" },
-    { token: "comment", foreground: "8b949e" },
-    { token: "variable.parameter", foreground: "ffa657" },
-  ],
-  colors: {
-    "editor.background": "#00000000",
-    "editor.lineHighlightBackground": "#ffffff0a",
-    "editorCursor.foreground": "#e6edf3",
-    "editor.selectionBackground": "#1f6feb40",
-  },
-});
-
+      base: "vs-dark",
+      inherit: true,
+      rules: [
+        { token: "keyword", foreground: "79c0ff" },
+        { token: "type", foreground: "79c0ff" },
+        { token: "string", foreground: "ffa657" },
+        { token: "number", foreground: "79c0ff" },
+        { token: "identifier", foreground: "e6edf3" },
+        { token: "identifier.function", foreground: "79c0ff" },
+        { token: "delimiter", foreground: "e6edf3" },
+        { token: "comment", foreground: "8b949e" },
+        { token: "variable.parameter", foreground: "ffa657" },
+      ],
+      colors: {
+        "editor.background": "#00000000",
+        "editor.lineHighlightBackground": "#ffffff0a",
+        "editorCursor.foreground": "#e6edf3",
+        "editor.selectionBackground": "#1f6feb40",
+      },
+    });
   };
 
   const handleEditorChange = (value: string | undefined) => {

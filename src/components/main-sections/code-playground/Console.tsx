@@ -62,7 +62,9 @@ const LogItem: React.FC<{ log: LogEntry }> = ({ log }) => {
   );
 };
 
-const ObjectRenderer: React.FC<{ data: any; isTopLevel?: boolean }> = ({
+type InspectableData = Record<string, unknown> | unknown[];
+
+const ObjectRenderer: React.FC<{ data: unknown; isTopLevel?: boolean }> = ({
   data,
   isTopLevel = false,
 }) => {
@@ -83,21 +85,23 @@ const ObjectRenderer: React.FC<{ data: any; isTopLevel?: boolean }> = ({
   }
 
   if (typeof data === "function") {
+    const functionName = (data as { name?: string }).name;
     return (
       <span className="italic">
-        <span className="text-blue-400">ƒ</span> {data.name || "(anonymous)"}()
+        <span className="text-blue-400">ƒ</span> {functionName || "(anonymous)"}
+        ()
       </span>
     );
   }
 
   if (typeof data === "object") {
-    return <InteractiveObject data={data} />;
+    return <InteractiveObject data={data as InspectableData} />;
   }
 
   return <span>{String(data)}</span>;
 };
 
-const InteractiveObject: React.FC<{ data: any }> = ({ data }) => {
+const InteractiveObject: React.FC<{ data: InspectableData }> = ({ data }) => {
   const [isOpen, setIsOpen] = useState(false);
   const isArray = Array.isArray(data);
   const keys = Object.keys(data);
@@ -108,7 +112,7 @@ const InteractiveObject: React.FC<{ data: any }> = ({ data }) => {
     if (isArray) {
       if (isEmpty) return "[]";
       // Try to show first few items
-      const items = data.slice(0, 3).map((item: any) => {
+      const items = data.slice(0, 3).map((item) => {
         if (typeof item === "object" && item !== null) return "{…}";
         return String(item);
       });
@@ -119,7 +123,7 @@ const InteractiveObject: React.FC<{ data: any }> = ({ data }) => {
 
     // Object: Show key: value pairs
     const entries = keys.slice(0, 5).map((key) => {
-      const val = data[key];
+      const val = data[key as keyof typeof data];
       let valStr = String(val);
       if (typeof val === "string") valStr = `"${val}"`;
       if (typeof val === "object" && val !== null) {
@@ -163,7 +167,7 @@ const InteractiveObject: React.FC<{ data: any }> = ({ data }) => {
           {keys.map((key) => (
             <div key={key} className="flex items-start">
               <span className="text-purple-400 mr-2">{key}:</span>
-              <ObjectRenderer data={data[key]} />
+              <ObjectRenderer data={data[key as keyof typeof data]} />
             </div>
           ))}
           {/* Array length visualization */}

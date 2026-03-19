@@ -8,6 +8,7 @@ import { useResizable } from "@/hooks/code-playground/useResizable";
 import { DEFAULT_CODE } from "@/constants/code-playground/defaultCode";
 import { Header } from "./Header";
 import { Editor } from "./Editor";
+import type { EditorInstance } from "./Editor";
 import { Console } from "./Console";
 
 export default function CodePlayground() {
@@ -17,7 +18,7 @@ export default function CodePlayground() {
     "horizontal",
   );
 
-  const editorInstance = useRef<any | null>(null);
+  const editorInstance = useRef<EditorInstance | null>(null);
   const codeRef = useRef(DEFAULT_CODE);
 
   const handleCodeChange = useCallback(

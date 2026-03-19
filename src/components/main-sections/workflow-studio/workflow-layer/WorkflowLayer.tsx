@@ -27,8 +27,11 @@ export const WorkflowLayer = forwardRef<HTMLDivElement, WorkflowLayerProps>(
     const { globalAnimationStyle } = useWorkflowAnimation();
 
     useEffect(() => {
-      nodeHandlers.onSelect(nodes[1].id);
-    }, []);
+      const secondNodeId = nodes[1]?.id;
+      if (secondNodeId) {
+        nodeHandlers.onSelect(secondNodeId);
+      }
+    }, [nodeHandlers, nodes]);
 
     // Calculate dynamic bounds for the SVG based on node positions
     const calculateSVGBounds = () => {
