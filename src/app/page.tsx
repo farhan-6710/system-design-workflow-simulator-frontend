@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { MainLayout } from "@/app/MainLayout";
 import WorkflowStudio from "@/components/main-sections/workflow-studio/WorflowStudio";
-import CodePlayground from "@/components/main-sections/code-playground/CodePlayground";
 
 export default function Dashboard() {
   const [currentPage, setCurrentPage] = useState("system-design");
@@ -13,7 +12,7 @@ export default function Dashboard() {
       case "my-progress":
         return <WorkflowStudio />;
       case "code-playground":
-        return <CodePlayground />;
+        return <WorkflowStudio />;
       case "system-design":
         return <WorkflowStudio />;
       case "challenges":
